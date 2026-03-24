@@ -77,5 +77,5 @@ Guardrails del Agente: El agente ReAct está restringido a herramientas analíti
 
 Infraestructura: El uso de Docker proporciona un entorno de ejecución aislado (sandboxed), garantizando la seguridad a nivel de sistema y protegiendo el host de accesos no autorizados.
 
-## Costo Estimado de Operación:
+## Costo Estimado de Operación
 Basado en pruebas con Claude 3.5 Sonnet, el costo promedio es de ~$0.02 USD por consulta compleja. Una sesión de análisis profundo de 10 preguntas tiene un costo proyectado de $0.20 USD.
