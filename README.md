@@ -69,3 +69,10 @@ El sistema está completamente contenedorizado para asegurar la reproducibilidad
 - **Tipado Estricto:** Uso de Pydantic para validación de esquemas bidireccionales.
 - **Observabilidad:** Logging detallado de la cadena de razonamiento (Thought/Action/Observation) en la consola del contenedor.
 - **Eficiencia OLAP:** Implementación de DuckDB para evitar latencias de red y costos de cómputo en la nube durante la fase de exploración.
+
+## 🔒 Nota de Seguridad
+Gestión de Credenciales: Los secretos y llaves de API se administran estrictamente mediante variables de entorno; no se incluye información sensible ni archivos .env en el control de versiones.
+
+Guardrails del Agente: El agente ReAct está restringido a herramientas analíticas específicas y predefinidas, lo que mitiga el riesgo de inyección de prompts o ejecución de código arbitrario.
+
+Infraestructura: El uso de Docker proporciona un entorno de ejecución aislado (sandboxed), garantizando la seguridad a nivel de sistema y protegiendo el host de accesos no autorizados.
