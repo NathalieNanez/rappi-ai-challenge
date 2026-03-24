@@ -10,7 +10,7 @@ El proyecto sigue una **Arquitectura Hexagonal (Ports & Adapters)**, garantizand
 - **Adapters de Infraestructura:**
   - **Query Engine:** DuckDB para procesamiento OLAP de alto rendimiento (In-memory).
   - **LLM Interface:** Claude 3.5 Sonnet para razonamiento analítico y generación de SQL.
-  - **Communication:** API de Brevo para la distribución proactiva de reportes.
+  - **Communication:** Integración con Brevo para el envío automatizado de reportes ejecutivos por email.
 - **Entry Points:** Interfaz dual vía FastAPI (para escalabilidad programática) y Streamlit (para consumo humano interactivo).
 
 ## 🧠 El Motor de Agente (ReAct + Self-Healing SQL)
