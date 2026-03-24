@@ -73,6 +73,8 @@ El sistema está completamente contenedorizado para asegurar la reproducibilidad
 ## 🔒 Nota de Seguridad
 Gestión de Credenciales: Los secretos y llaves de API se administran estrictamente mediante variables de entorno; no se incluye información sensible ni archivos .env en el control de versiones.
 
+## Costo Estimado de Operación:
+Basado en pruebas con Claude 3.5 Sonnet, el costo promedio es de ~$0.02 USD por consulta compleja. Una sesión de análisis profundo de 10 preguntas tiene un costo proyectado de $0.20 USD.
 Guardrails del Agente: El agente ReAct está restringido a herramientas analíticas específicas y predefinidas, lo que mitiga el riesgo de inyección de prompts o ejecución de código arbitrario.
 
 Infraestructura: El uso de Docker proporciona un entorno de ejecución aislado (sandboxed), garantizando la seguridad a nivel de sistema y protegiendo el host de accesos no autorizados.
