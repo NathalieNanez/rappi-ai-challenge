@@ -1,0 +1,18 @@
+services:
+  rappi-ai-system:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rappi-ai-system
+    ports:
+      - "8000:8000" # FastAPI backend mapping
+      - "8501:8501" # Streamlit UI mapping
+    env_file:
+      - .env
+    volumes:
+      # Mount data folder for local dataset ingestion
+      - ./data:/app/data
+    restart: unless-stopped
+    environment:
+      # Provide explicit environment variables explicitly inside the container if needed
+      - PYTHONUNBUFFERED=1

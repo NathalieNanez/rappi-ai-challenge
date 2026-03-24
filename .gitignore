@@ -1,0 +1,23 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Caché de Python y binarios
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Variables de entorno y secretos
+.env
+*.pem
+credentials.json
+
+# Datos sensibles o pesados
+data/raw/*.xlsx
+data/raw/*.csv
+
+# Archivos del sistema operativo (Mac)
+.DS_Store
+*.log
