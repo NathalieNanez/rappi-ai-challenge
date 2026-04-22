@@ -1,12 +1,12 @@
-# 🚀 Rappi AI System: Inteligencia Operacional Proactiva
+# 🚀 AI System: Inteligencia Operacional Proactiva
 
 ## 📖 Resumen Ejecutivo
-El **Rappi AI System** es un motor de decisiones diseñado para democratizar el acceso a métricas críticas en los equipos de Strategy, Planning & Analytics (SP&A) y Operaciones de Rappi. A través de una interfaz de lenguaje natural, el sistema permite diagnosticar anomalías, trackear tendencias y ejecutar benchmarks complejos, reduciendo la latencia de respuesta de horas de análisis manual a segundos de ejecución determinística.
+El **AI System** es un motor de decisiones diseñado para democratizar el acceso a métricas críticas en los equipos de Strategy, Planning & Analytics (SP&A) y Operaciones de Rappi. A través de una interfaz de lenguaje natural, el sistema permite diagnosticar anomalías, trackear tendencias y ejecutar benchmarks complejos, reduciendo la latencia de respuesta de horas de análisis manual a segundos de ejecución determinística.
 
 ## 🏗️ Arquitectura del Sistema
 El proyecto sigue una **Arquitectura Hexagonal (Ports & Adapters)**, garantizando que la lógica de negocio sea independiente de las herramientas externas:
 
-- **Domain Core:** Lógica de cálculo de métricas operacionales, detección de anomalías y reglas de negocio específicas de Rappi.
+- **Domain Core:** Lógica de cálculo de métricas operacionales, detección de anomalías y reglas de negocio específicas de un negocio.
 - **Adapters de Infraestructura:**
   - **Query Engine:** DuckDB para procesamiento OLAP de alto rendimiento (In-memory).
   - **LLM Interface:** Claude 3.5 Sonnet para razonamiento analítico y generación de SQL.
@@ -22,7 +22,7 @@ El sistema implementa el patrón **ReAct** (Reasoning and Acting), permitiendo u
 - **Memoria Conversacional:** Mantenimiento de estado para permitir hilos de investigación profundos (ej: "¿Y cuántas de esas zonas son de México?").
 
 ## 🛡️ Reglas y Guardrails de Calidad de Datos (Senior Constraints)
-Para garantizar la confiabilidad necesaria en una operación de la escala de Rappi:
+Para garantizar la confiabilidad necesaria en una operación de la escala de la empresa:
 
 - **Deduplicación Estructural:** Capa de limpieza en `loader.py` que elimina redundancias en metadatos de zonas (Country/City/Zone) mediante llaves compuestas.
 - **Data Audit Proactivo:** El sistema identifica valores imposibles (ej. Lead Penetration > 100% o valores anómalos en Ecuador) y los reporta como hallazgos de calidad de datos en lugar de procesarlos ciegamente.
