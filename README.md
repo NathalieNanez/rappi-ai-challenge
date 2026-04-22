@@ -1,81 +1,81 @@
-# 🚀 AI System: Inteligencia Operacional Proactiva
+🚀 AI Operational Intelligence System
+📖 Overview
+An AI-powered decision engine designed to democratize access to critical operational metrics for Strategy, Planning & Analytics (SP&A) and Operations teams. Through a natural language interface, the system enables users to diagnose anomalies, track trends, and run complex benchmarks — reducing response latency from hours of manual analysis to seconds of deterministic execution.
 
-## 📖 Resumen Ejecutivo
-El **AI System** es un motor de decisiones diseñado para democratizar el acceso a métricas críticas en los equipos de Strategy, Planning & Analytics (SP&A) y Operaciones de Rappi. A través de una interfaz de lenguaje natural, el sistema permite diagnosticar anomalías, trackear tendencias y ejecutar benchmarks complejos, reduciendo la latencia de respuesta de horas de análisis manual a segundos de ejecución determinística.
+🏗️ Architecture
+The project follows a Hexagonal Architecture (Ports & Adapters), ensuring business logic remains fully independent of external tooling:
 
-## 🏗️ Arquitectura del Sistema
-El proyecto sigue una **Arquitectura Hexagonal (Ports & Adapters)**, garantizando que la lógica de negocio sea independiente de las herramientas externas:
+Domain Core: Business metric calculation logic, anomaly detection, and domain-specific rules.
+Infrastructure Adapters:
 
-- **Domain Core:** Lógica de cálculo de métricas operacionales, detección de anomalías y reglas de negocio específicas de un negocio.
-- **Adapters de Infraestructura:**
-  - **Query Engine:** DuckDB para procesamiento OLAP de alto rendimiento (In-memory).
-  - **LLM Interface:** Claude 3.5 Sonnet para razonamiento analítico y generación de SQL.
-  - **Communication:** Integración con Brevo para el envío automatizado de reportes ejecutivos por email.
-- **Entry Points:** Interfaz dual vía FastAPI (para escalabilidad programática) y Streamlit (para consumo humano interactivo).
+Query Engine: DuckDB for high-performance in-memory OLAP processing.
+LLM Interface: Claude 3.5 Sonnet for analytical reasoning and SQL generation.
+Communication: Brevo integration for automated executive report delivery via email.
 
-## 🧠 El Motor de Agente (ReAct + Self-Healing SQL)
-El sistema implementa el patrón **ReAct** (Reasoning and Acting), permitiendo una observabilidad total sobre el proceso de pensamiento de la IA:
 
-- **Pensamiento (Reasoning):** El agente analiza el esquema de las tablas y el diccionario de métricas para decidir la mejor estrategia de consulta.
-- **Acción (Action):** Genera y ejecuta SQL sobre DuckDB.
-- **Auto-Corrección (Self-Healing):** Si una consulta SQL falla por sintaxis o falta de datos, el agente captura el error, razona la causa y reescribe la consulta automáticamente antes de responder.
-- **Memoria Conversacional:** Mantenimiento de estado para permitir hilos de investigación profundos (ej: "¿Y cuántas de esas zonas son de México?").
+Entry Points: Dual interface via FastAPI (programmatic scalability) and Streamlit (interactive human consumption).
 
-## 🛡️ Reglas y Guardrails de Calidad de Datos (Senior Constraints)
-Para garantizar la confiabilidad necesaria en una operación de la escala de la empresa:
 
-- **Deduplicación Estructural:** Capa de limpieza en `loader.py` que elimina redundancias en metadatos de zonas (Country/City/Zone) mediante llaves compuestas.
-- **Data Audit Proactivo:** El sistema identifica valores imposibles (ej. Lead Penetration > 100% o valores anómalos en Ecuador) y los reporta como hallazgos de calidad de datos en lugar de procesarlos ciegamente.
-- **Aislamiento de Dominio:** Credenciales y configuraciones sensibles gestionadas estrictamente vía variables de entorno (`.env`).
+🧠 Agent Engine (ReAct + Self-Healing SQL)
+The system implements the ReAct (Reasoning and Acting) pattern, providing full observability over the AI reasoning process:
 
-## 🖥️ Guía de Uso de la Interfaz (UI)
-La UI está dividida estratégicamente según el perfil del usuario:
+Reasoning: The agent analyzes table schemas and a metric dictionary to determine the best query strategy.
+Action: Generates and executes SQL against DuckDB.
+Self-Healing: If a SQL query fails due to syntax errors or missing data, the agent captures the error, reasons about the cause, and rewrites the query automatically before responding.
+Conversational Memory: Maintains state to support deep investigation threads (e.g., "And how many of those zones are from Mexico?").
 
-### 1. 💬 Chat de Datos (Análisis Ad-hoc)
-- **Uso:** Preguntas libres sobre el dataset (Tendencias, Agregaciones, Comparaciones).
-- **Visualización:** Generación dinámica de gráficas interactivas en **Plotly** (Líneas, Barras, Dispersión, Heatmaps y Boxplots) para explorar series temporales, distribuciones y correlaciones.
-- **Exportación:** Botones integrados para descargar los resultados específicos de la consulta en CSV y PDF.
 
-### 2. � Reporte de Insights (Análisis Proactivo)
-- **Uso:** Visión ejecutiva de "incendios" y oportunidades sin necesidad de prompts.
-- **Semáforos Operacionales:** Clasificación automática en 🔴 Anomalías, 🟠 Tendencias de deterioro y 🟢 Oportunidades de expansión.
-- **Distribución:** Envío del reporte formateado en PDF directamente al correo del solicitante mediante un solo clic.
+🛡️ Data Quality Rules & Guardrails
+To ensure reliability at operational scale:
 
-## 💰 Monitoreo de Costos (FinOps)
-Como estándar de eficiencia en proyectos de IA Generativa, la interfaz incluye un Monitor de Gastos en Tiempo Real:
+Structural Deduplication: Cleaning layer in loader.py that eliminates redundancies in zone metadata (Country/City/Zone) using composite keys.
+Proactive Data Audit: The system identifies impossible values (e.g., Lead Penetration > 100% or anomalous values in specific regions) and surfaces them as data quality findings rather than processing them blindly.
+Domain Isolation: Credentials and sensitive configurations managed strictly via environment variables (.env).
 
-- **Costo Estimado (Claude 3.5 Sonnet):** Cálculo dinámico basado en tokens de entrada y salida de cada sesión.
-- **Transparencia:** Permite a los administradores del sistema auditar el costo operativo por cada consulta analítica.
 
-## 🛠️ Configuración y Despliegue (Docker)
-El sistema está completamente contenedorizado para asegurar la reproducibilidad total.
+🖥️ Interface Guide
+The UI is divided strategically based on user profile:
+1. 💬 Data Chat (Ad-hoc Analysis)
 
-### Pasos para Ejecución
+Use: Free-form questions about the dataset — trends, aggregations, comparisons.
+Visualization: Dynamic interactive charts via Plotly (Line, Bar, Scatter, Heatmaps, Boxplots) for time series, distributions, and correlations.
+Export: Integrated buttons to download query-specific results as CSV and PDF.
 
-1. **Configurar Variables de Env (`.env`):**
-   ```env
-   ANTHROPIC_API_KEY=tu_api_key_de_anthropic
-   BREVO_API_KEY=tu_api_key_de_brevo
-   BREVO_SENDER_EMAIL=tu_correo_verificado@gmail.com
-   DATA_PATH=data/raw/rappi_data.xlsx
-   ```
+2. 📊 Insights Report (Proactive Analysis)
 
-2. **Levantar el Sistema:**
-   ```bash
-   docker-compose up --build
-   ```
+Use: Executive-level view of critical issues and opportunities, no prompting required.
+Operational Signals: Automatic classification into 🔴 Anomalies, 🟠 Deteriorating Trends, and 🟢 Expansion Opportunities.
+Distribution: Formatted PDF report sent directly to the requester's email in one click.
 
-## 📐 Estándares de Ingeniería
-- **Tipado Estricto:** Uso de Pydantic para validación de esquemas bidireccionales.
-- **Observabilidad:** Logging detallado de la cadena de razonamiento (Thought/Action/Observation) en la consola del contenedor.
-- **Eficiencia OLAP:** Implementación de DuckDB para evitar latencias de red y costos de cómputo en la nube durante la fase de exploración.
 
-## 🔒 Nota de Seguridad
-Gestión de Credenciales: Los secretos y llaves de API se administran estrictamente mediante variables de entorno; no se incluye información sensible ni archivos .env en el control de versiones.
+💰 Cost Monitoring (FinOps)
+As a standard of efficiency in Generative AI projects, the interface includes a Real-Time Cost Monitor:
 
-Guardrails del Agente: El agente ReAct está restringido a herramientas analíticas específicas y predefinidas, lo que mitiga el riesgo de inyección de prompts o ejecución de código arbitrario.
+Estimated Cost (Claude 3.5 Sonnet): Dynamic calculation based on input/output tokens per session.
+Transparency: Allows system administrators to audit the operational cost of each analytical query.
 
-Infraestructura: El uso de Docker proporciona un entorno de ejecución aislado (sandboxed), garantizando la seguridad a nivel de sistema y protegiendo el host de accesos no autorizados.
+Based on testing with Claude 3.5 Sonnet, the average cost is ~$0.02 USD per complex query. A deep analysis session of 10 questions has a projected cost of $0.20 USD.
 
-## Costo Estimado de Operación
-Basado en pruebas con Claude 3.5 Sonnet, el costo promedio es de ~$0.02 USD por consulta compleja. Una sesión de análisis profundo de 10 preguntas tiene un costo proyectado de $0.20 USD.
+🛠️ Setup & Deployment (Docker)
+The system is fully containerized for total reproducibility.
+Steps
+1. Configure environment variables (.env):
+envANTHROPIC_API_KEY=your_anthropic_api_key
+BREVO_API_KEY=your_brevo_api_key
+BREVO_SENDER_EMAIL=your_verified_email@gmail.com
+DATA_PATH=data/raw/operational_data.xlsx
+2. Start the system:
+bashdocker-compose up --build
+
+📐 Engineering Standards
+
+Strict Typing: Pydantic used for bidirectional schema validation.
+Observability: Detailed logging of the reasoning chain (Thought/Action/Observation) in the container console.
+OLAP Efficiency: DuckDB implementation avoids network latency and cloud compute costs during the exploration phase.
+
+
+🔒 Security
+
+Credential Management: API keys and secrets are managed strictly via environment variables — no sensitive information or .env files are included in version control.
+Agent Guardrails: The ReAct agent is restricted to specific, predefined analytical tools, mitigating the risk of prompt injection or arbitrary code execution.
+Infrastructure: Docker provides a sandboxed execution environment, ensuring system-level security and protecting the host from unauthorized access.
